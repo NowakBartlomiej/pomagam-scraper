@@ -30,11 +30,27 @@ class MainController extends Controller
 
         // converting body to associative array
         $data = json_decode($body, true);
+        $html = $data['html'];
+        $has_next = $data['has_next'];
 
+        
         if ($response_status_code == 200) {
-            dd($data['html'], $data['has_next']);
+            preg_match_all(config('constants.regex.title'), $html, $title);
+            preg_match_all(config('constants.regex.slug'), $html, $slug);
+            preg_match_all(config('constants.regex.image'), $html, $img);
+            preg_match_all(config('constants.regex.alt'), $html, $alt);
+            preg_match_all(config('constants.regex.number_id'), $html, $number_id);
+            preg_match_all(config('constants.regex.amount'), $html, $amount);
+            for($i = 0; $i < count($amount); $i++) {
+                $amount[$i] = preg_replace('/\xc2\xa0/', '', $amount[$i]);
+                $amount[$i] = str_replace(" ", "", $amount[$i]);
+            }
+
+            dd($title, $slug, $img, $alt, $number_id, $amount);
+            dd($html, $has_next);
         }
 
         dd($response);
     }
+
 }
