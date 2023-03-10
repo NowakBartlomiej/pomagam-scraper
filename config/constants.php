@@ -9,4 +9,12 @@ return [
         'number_id' => '/(?<=id=\").*?(?=\")/',
         'amount' => '/(?<=>).*?(?=zł)/',
     ],
+
+    'category' => [
+        'popular' => 'popularne',
+        'treatment' => 'leczenie',
+        'needs' => 'potrzeby',
+        'animals' => 'zwierzeta',
+        'projects' => 'projekty'
+    ]
 ];

@@ -36,9 +36,17 @@ class ScrapeService
 
     public function scrape()
     {
+        $this->scrapeCategory(config('constants.category.popular'));
+        $this->scrapeCategory(config('constants.category.treatment'));
+        $this->scrapeCategory(config('constants.category.needs'));
+        $this->scrapeCategory(config('constants.category.animals'));
+        $this->scrapeCategory(config('constants.category.projects'));
+    }
+
+    public function scrapeCategory($category) {
         $pageNumber = 1;
         // URL
-        $url = "https://pomagam.pl/t/popularne?current_page=$pageNumber&type=category_projects";
+        $url = "https://pomagam.pl/t/$category?current_page=$pageNumber&type=category_projects";
         
         // Getting data from URL and resposnse status code
         list($data, $response_status_code) = $this->getDataFromURL($url);
@@ -48,7 +56,7 @@ class ScrapeService
 
         while ($has_next) {
             // URL
-            $url = "https://pomagam.pl/t/popularne?current_page=$pageNumber&type=category_projects";    
+            $url = "https://pomagam.pl/t/$category?current_page=$pageNumber&type=category_projects";    
 
             // Getting data from URL and resposnse status code
             list($data, $response_status_code) = $this->getDataFromURL($url);
@@ -60,20 +68,17 @@ class ScrapeService
             // Getting finded datas from html
             list($titles, $slugs, $imgs, $alts, $numbers_id, $amounts) = $this->findData($html);
 
-            // Making array with all datas
-            // $values = array(
-            //     $titles, $slugs, $imgs, $alts, $numbers_id, $amounts
-            // );
-
-            //! Tu dodawac do bazy dancyh
-            echo $pageNumber . "\xA";
+            //! Adding data to database
+            echo $category . " " . $pageNumber . "\xA";
             for ($i = 0; $i < count($titles); $i++) {
                 Data::upsert([
-                    'title' => $titles[$i], 'slug' => $slugs[$i], 'image' => $imgs[$i], 'alt' => $alts[$i], 'number_id' => $numbers_id[$i], 'amount' => $amounts[$i]
-                ], ['number_id'], ['amount']);
+                    'title' => $titles[$i], 'slug' => $slugs[$i], 'image' => $imgs[$i], 'alt' => $alts[$i], 'number_id' => $numbers_id[$i], 'amount' => $amounts[$i], 'category' => $category,
+                ], ['number_id'], ['amount', 'category']);
             }
            
+            // Go to next page
             $pageNumber = $pageNumber + 1;
+            
             // is website has more data
             $has_next = $data['has_next'];
         }
