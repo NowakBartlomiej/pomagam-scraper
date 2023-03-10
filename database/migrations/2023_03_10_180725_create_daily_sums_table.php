@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('daily_sums', function (Blueprint $table) {
             $table->id();
             $table->integer('sum');
-            $table->date('date');
+            $table->date('date')->unique();
             $table->timestamps();
         });
     }
