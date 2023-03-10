@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('alt');
             $table->string('number_id')->unique();
             $table->integer('amount');
+            $table->string('category');
             $table->timestamps();
         });
     }
