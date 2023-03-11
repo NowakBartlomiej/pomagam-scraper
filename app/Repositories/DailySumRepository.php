@@ -7,6 +7,6 @@ use App\Models\DailySum;
 
 class DailySumRepository implements DailySumRepositoryInterface {
     public function getAll() {
-        return DailySum::all();
+        return DailySum::orderBy('date', 'DESC')->get();
     }
 }
