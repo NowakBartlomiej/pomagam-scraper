@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\Api\V1\DailySumController;
-use App\Http\Controllers\Api\V1\DataController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\V1\DataController;
+use App\Http\Controllers\Api\V1\DailySumController;
+use App\Http\Controllers\Api\V1\DailyCollectionAmountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +26,4 @@ Route::get('getCount', [DataController::class, 'getCount']);
 Route::get('getTotalAmount', [DataController::class, 'getTotalAmount']);
 
 Route::get('dailySum', [DailySumController::class, 'index']);
+Route::get('dailyCollectionAmount', [DailyCollectionAmountController::class, 'index']);

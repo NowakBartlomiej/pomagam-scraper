@@ -20,5 +20,6 @@ Route::get('/', function () {
 
 Route::get('scrape', [MainController::class, 'scrape']);
 Route::get('dailySum', [MainController::class, 'dailySum']);
+Route::get('dailyCollectionAmount', [MainController::class, 'dailyCollectionAmount']);
 
 
