@@ -22,7 +22,7 @@ class DataController extends Controller
      */
     public function index()
     {
-        return new DataCollection(Data::paginate());
+        return new DataCollection(Data::get());
     }
 
     public function getCount() {
