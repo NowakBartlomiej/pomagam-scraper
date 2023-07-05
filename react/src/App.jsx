@@ -1,3 +1,4 @@
+import { Outlet } from "react-router-dom"
 import { Sidebar } from "./components/Sidebar"
 import TablePage from "./pages/TablePage"
 
@@ -7,7 +8,7 @@ function App() {
     <div className="flex">
       <Sidebar />
       <div className="p-6 pl-10">
-        <TablePage />
+        <Outlet />
       </div>
     </div>
   )
