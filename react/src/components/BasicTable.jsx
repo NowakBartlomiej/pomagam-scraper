@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { useReactTable, getCoreRowModel, flexRender, getPaginationRowModel, getSortedRowModel, getFilteredRowModel  } from '@tanstack/react-table'
 import { useCollections } from '../hooks/useCollections';
 
+import {formatAmount, formatNumberId} from '../helpers'
+
 //TODO LOADING SCREEN
 export const BasicTable = () => {
   const {data, isLoading} = useCollections()
@@ -9,19 +11,8 @@ export const BasicTable = () => {
   /** @type import('@tanstack/react-table').ColumnDef<any> */
   const columns = [
     {
-      header: 'ID',
+      header: 'L.P.',
       accessorKey: 'id',
-      footer: 'ID',
-    },
-    {
-      header: 'Tytuł',
-      accessorKey: 'title',
-      footer: 'Tytuł',
-    },
-    {
-      header: 'Slug',
-      accessorKey: 'slug',
-      footer: 'Slug',
     },
     {
       header: 'Ikona',
@@ -36,17 +27,30 @@ export const BasicTable = () => {
     {
       header: 'Numer Id',
       accessorKey: 'numberId',
-      footer: 'Numer Id',
+      cell: value => formatNumberId(value.getValue())
+    },
+    {
+      header: 'Tytuł',
+      accessorKey: 'title',
+      footer: 'Tytuł',
+    },
+    {
+      header: 'Link',
+      accessorKey: 'slug',
+      cell: (props) => flexRender(
+        <a className="font-medium text-blue-600 dark:text-blue-500 hover:underline" href={`https://pomagam.pl/${props.getValue()}`} target="_blank" rel="noopener noreferrer">
+          {`https://pomagam.pl/${props.getValue()}`}
+        </a>
+      )
     },
     {
       header: 'Suma',
       accessorKey: 'amount',
-      footer: 'Suma',
+      cell: value => formatAmount(value.getValue())
     },
     {
       header: 'Kategoria',
       accessorKey: 'category',
-      footer: 'Kategoria',
     },
   ]
   
@@ -69,25 +73,23 @@ export const BasicTable = () => {
     
   });
 
-  
-  
   return (
     <div className="overflow-x-auto shadow-md sm:rounded-lg">
       {isLoading ? 'loading' :
       (
         <>
         <div className='w-80 mb-4'>
-          <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only ">Search</label>
-          <div class="relative">
-            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-              <svg class="w-4 h-4 text-gray-500 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+          <label htmlFor="default-search" className="mb-2 text-sm font-medium text-gray-900 sr-only ">Search</label>
+          <div className="relative">
+            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+              <svg className="w-4 h-4 text-gray-500 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                  <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
               </svg>
             </div>
             <input 
             value={filtering}
             onChange={(e) => setFiltering(e.target.value)}
-            type="search" id="default-search" class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500     " placeholder="Szukaj..."></input>
+            type="search" id="default-search" className="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500     " placeholder="Szukaj..."></input>
           </div>
         </div>
 
@@ -135,7 +137,7 @@ export const BasicTable = () => {
           <button
             onClick={() => table.setPageIndex(0)}
             disabled={!table.getCanPreviousPage()}
-            className='border m-2 p-2'
+            className='disabled:opacity-50 border m-2 p-2'
           >
             {"<<"}
           </button>
@@ -143,7 +145,7 @@ export const BasicTable = () => {
           <button
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
-            className='border m-2 p-2'
+            className='disabled:opacity-50 border m-2 p-2'
           >
             {"<"}
           </button>
@@ -151,7 +153,7 @@ export const BasicTable = () => {
           <button
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
-            className='border m-2 p-2'
+            className='disabled:opacity-50 border m-2 p-2'
           >
             {">"}
           </button>
@@ -159,34 +161,10 @@ export const BasicTable = () => {
           <button
             onClick={() => table.setPageIndex(table.getPageCount() - 1)}
             disabled={!table.getCanNextPage()}
-            className='border m-2 p-2'
+            className='disabled:opacity-50 border m-2 p-2'
           >
             {">>"}
           </button>
-
-
-
-          {/* <button 
-            onClick={() => {
-              table.previousPage()
-            }} 
-            disabled={!table.getCanPreviousPage()} 
-            className='border m-2 p-2'
-          >Poprzednia</button>
-
-          <button 
-            onClick={() => {
-            table.setPageIndex(0)
-            }} 
-            className='border m-2 p-2'
-          >1</button>
-
-          {table.getCanNextPage && (
-            <button onClick={() => {
-              table.setPageIndex(0)
-            }} className='border m-2 p-2'>{table.getPageCount()}</button>
-          )} */}
-
         
         </div>
         
