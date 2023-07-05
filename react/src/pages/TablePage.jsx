@@ -1,6 +1,7 @@
 import React from 'react'
 import { Header } from '../components/Header'
 import { useCollections } from '../hooks/useCollections'
+import { BasicTable } from '../components/BasicTable'
 
 
 const TablePage = () => {
@@ -10,9 +11,11 @@ const TablePage = () => {
     <div>
         <Header title="Tabela Zbiórek"/>
 
-        <div>
+        <BasicTable />
+
+        {/* <div>
             {isLoading ? 'Loading' : JSON.stringify(data)}
-        </div>
+        </div> */}
     </div>
   )
 }
