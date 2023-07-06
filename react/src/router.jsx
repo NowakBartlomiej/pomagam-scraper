@@ -10,7 +10,33 @@ const router = createBrowserRouter([
             {
                 path: 'tabela-zbiorek',
                 element: <TablePage />
-            }
+            },
+
+            {
+                path: 'kwota-zebrana-dzisiaj',
+                element: <h1>kwota-zebrana-dzisiaj</h1>
+            },
+
+            {
+                path: 'kwota-zebrana-calkowicie',
+                element: <h1>kwota-zebrana-calkowicie</h1>
+            },
+
+            {
+                path: 'kategorie',
+                element: <h1>kategorie</h1>
+            },
+
+            {
+                path: 'wykresy/kwota-zebrana-dzisiaj',
+                element: <h1>wykresy/kwota-zebrana-dzisiaj</h1>
+            },
+
+            {
+                path: 'wykresy/kwota-zebrana-calkowicie',
+                element: <h1>wykresy/kwota-zebrana-calkowicie</h1>
+            },
+
         ]
     },
     {

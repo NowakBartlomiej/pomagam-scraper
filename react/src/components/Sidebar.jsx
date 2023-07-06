@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
 import {BsArrowLeftShort, BsBarChartFill, BsChevronDown} from 'react-icons/bs'
 import {RiDashboardFill} from 'react-icons/ri';
-import {AiOutlineTable} from 'react-icons/ai'
+import {AiOutlineTable, AiOutlineLineChart} from 'react-icons/ai'
+import {BiCategoryAlt} from 'react-icons/bi'
+import {MdToday} from 'react-icons/md'
+import {LiaPiggyBankSolid} from 'react-icons/lia'
 import { useNavigate } from 'react-router-dom';
 
 export const Sidebar = () => {
@@ -17,19 +20,36 @@ export const Sidebar = () => {
       icon: <AiOutlineTable/>
 
     },
-    {title: "Option 2"},
-    {title: "Option 3"},
     {
-      title: "Menu",
+      title: "Kwota Zebrana Dzisiaj",
+      path: 'kwota-zebrana-dzisiaj',
+      icon: <MdToday />
+    },
+    {
+      title: "Kwota Zebrana Całkowicie",
+      path: 'kwota-zebrana-calkowicie',
+      icon: <LiaPiggyBankSolid />
+    },
+    {
+      title: "Wykresy",
+      icon: <AiOutlineLineChart/>,
       submenu: true,
       submenuItems: [
-        {title: "Sub 1"},
-        {title: "Sub 2"},
-        {title: "Sub 3"},
+        {
+          title: "Dzienne Zebrane Kwoty",
+          path: 'wykresy/kwota-zebrana-dzisiaj',
+        },
+        {
+          title: "Dzienne Sumy Całkowite",
+          path: 'wykresy/kwota-zebrana-calkowicie'
+        },
       ]
     },
-    {title: "Option 4"},
-    {title: "Option 5"},
+    {
+      title: "Kategorie Zbiórek",
+      path: 'kategorie',
+      icon: <BiCategoryAlt />
+    },
   ];
    
   return (
@@ -77,7 +97,13 @@ export const Sidebar = () => {
           {menu.submenu && submenuOpen && open && (
             <ul>
               {menu.submenuItems.map((submenuItem, index) => (
-                <li key={index}
+                <li 
+                onClick={() => {
+                  if (submenuItem.path) {
+                    navigate(submenuItem.path);
+                  }
+                }}
+                key={index}
                 className={`text-slate-800 text-sm flex items-center gap-x-4 cursor-pointer p-2
             hover:bg-slate-200 rounded-md mt-2 px-5
                 `}>
