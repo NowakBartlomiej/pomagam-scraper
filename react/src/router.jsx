@@ -1,6 +1,11 @@
 import {createBrowserRouter} from 'react-router-dom'
 import App from './App';
 import TablePage from './pages/TablePage';
+import { TodayCollectedPage } from './pages/TodayCollectedPage';
+import { TotalSumPage } from './pages/TotalSumPage';
+import CategoriesPage from './pages/CategoriesPage';
+import { TodayCollectedChartPage } from './pages/charts/TodayCollectedChartPage';
+import TotalSumChartPage from './pages/charts/TotalSumChartPage';
 
 const router = createBrowserRouter([
     {
@@ -14,27 +19,27 @@ const router = createBrowserRouter([
 
             {
                 path: 'kwota-zebrana-dzisiaj',
-                element: <h1>kwota-zebrana-dzisiaj</h1>
+                element: <TodayCollectedPage/>
             },
 
             {
                 path: 'kwota-zebrana-calkowicie',
-                element: <h1>kwota-zebrana-calkowicie</h1>
+                element: <TotalSumPage />
             },
 
             {
                 path: 'kategorie',
-                element: <h1>kategorie</h1>
+                element: <CategoriesPage />
             },
 
             {
                 path: 'wykresy/kwota-zebrana-dzisiaj',
-                element: <h1>wykresy/kwota-zebrana-dzisiaj</h1>
+                element: <TodayCollectedChartPage />
             },
 
             {
                 path: 'wykresy/kwota-zebrana-calkowicie',
-                element: <h1>wykresy/kwota-zebrana-calkowicie</h1>
+                element: <TotalSumChartPage />
             },
 
         ]
