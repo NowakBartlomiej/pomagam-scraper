@@ -17,7 +17,7 @@ class DailyCollectionAmountService {
     }
 
     public function getDailyCollectionAmount() {
-        $difference = $this->dailySumRepository->getFirstSum() - $this->dailySumRepository->getSecondSum();
+        $difference = $this->dailySumRepository->getSecondSum() - $this->dailySumRepository->getFirstSum();
 
         DailyCollectionAmount::upsert([
             'daily_collection_amount' => $difference,
