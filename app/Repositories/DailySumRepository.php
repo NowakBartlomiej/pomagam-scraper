@@ -17,4 +17,8 @@ class DailySumRepository implements DailySumRepositoryInterface {
     public function getSecondSum() {
         return DailySum::orderBy('date', 'DESC')->skip(1)->first()->sum;
     }
+
+    public function getChartData() {
+        return DailySum::orderBy('date', 'ASC')->get();
+    }
 }

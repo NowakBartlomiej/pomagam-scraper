@@ -24,5 +24,9 @@ class DailySumController extends Controller
         return new DailySumCollection($this->dailySumRepository->getAll());
     }
 
+    public function chartData() {
+        return new DailySumCollection($this->dailySumRepository->getChartData());
+    }
+
     
 }

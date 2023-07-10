@@ -1,8 +1,14 @@
 import React from 'react'
+import { Header } from '../../components/Header'
+import { TotalSumChart } from '../../components/TotalSumChart'
 
 const TotalSumChartPage = () => {
   return (
-    <div>TotalSumChartPage</div>
+    <div>
+      <Header title={"Dzienne Sumy Całkowite"}/>
+
+      <TotalSumChart /> 
+    </div>
   )
 }
 

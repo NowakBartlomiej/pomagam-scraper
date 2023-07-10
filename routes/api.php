@@ -26,4 +26,5 @@ Route::get('getCount', [DataController::class, 'getCount']);
 Route::get('getTotalAmount', [DataController::class, 'getTotalAmount']);
 
 Route::get('dailySum', [DailySumController::class, 'index']);
+Route::get('dailySumChartData', [DailySumController::class, 'chartData']);
 Route::get('dailyCollectionAmount', [DailyCollectionAmountController::class, 'index']);
