@@ -6,7 +6,8 @@ import { formatAmount } from '../helpers'
 
 export const TodayCollectedPage = () => {
   const {data, isLoading} = useDailyCollectionAmount();
-  const dailyColAmount = data?.data[0].daily_collection_amount;
+  const length = data?.data.length;
+  const dailyColAmount = data?.data[length - 1].daily_collection_amount;
   
   return (
     <div>
